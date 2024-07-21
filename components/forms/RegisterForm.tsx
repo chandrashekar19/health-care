@@ -5,15 +5,12 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
 import { Form, FormControl } from '@/components/ui/form';
 import { UserFormValidation } from '@/lib/validation';
-
 import 'react-phone-number-input/style.css';
 import CustomFormField, { FormFieldType } from '../CustomFormField';
 import SubmitButton from '../SubmitButton';
 import { createUser } from '@/lib/actions/patient.actions';
-import exp from 'constants';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { GenderOptions } from '@/constants';
