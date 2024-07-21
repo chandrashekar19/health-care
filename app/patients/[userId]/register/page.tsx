@@ -34,7 +34,7 @@ const Registration = async ({ params: { userId } }: SearchParamProps) => {
         height={1000}
         width={1000}
         alt='pateint'
-        className='side-img max-w-[50%]'
+        className='side-img max-w-[40%]'
       />
     </div>
   );
