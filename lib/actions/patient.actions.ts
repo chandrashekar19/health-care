@@ -81,3 +81,23 @@ export const registerPatient = async ({
     console.error("An error occurred while creating a new patient:", error);
   }
 };
+
+// GET PATIENT
+export const getPatient = async (userId: string) => {
+  const DATABASE_ID = process.env.NEXT_PUBLIC_DATABASE_ID!;
+  const PATIENT_COLLECTION_ID = process.env.NEXT_PUBLIC_PATIENT_COLLECTION_ID!;
+  try {
+    const patients = await databases.listDocuments(
+      DATABASE_ID!,
+      PATIENT_COLLECTION_ID!,
+      [Query.equal("userId", [userId])]
+    );
+
+    return parseStringify(patients.documents[0]);
+  } catch (error) {
+    console.error(
+      "An error occurred while retrieving the patient details:",
+      error
+    );
+  }
+};
