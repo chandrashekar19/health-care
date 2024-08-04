@@ -23,7 +23,7 @@ export const createAppointment = async (
       appointment
     );
 
-    // revalidatePath("/admin");
+    revalidatePath("/admin");
     return parseStringify(newAppointment);
   } catch (error) {
     console.error("An error occurred while creating a new appointment:", error);
@@ -158,8 +158,9 @@ export const updateAppointment = async ({
 
 // GET APPOINTMENT
 export const getAppointment = async (appointmentId: string) => {
-  const APPOINTMENT_COLLECTION_ID = process.env.APPOINTMENT_COLLECTION_ID!;
-  const DATABASE_ID = process.env.DATABASE_ID!;
+  const APPOINTMENT_COLLECTION_ID =
+    process.env.NEXT_PUBLIC_APPOINTMENT_COLLECTION_ID!;
+  const DATABASE_ID = process.env.NEXT_PUBLIC_DATABASE_ID!;
   try {
     const appointment = await databases.getDocument(
       DATABASE_ID!,
