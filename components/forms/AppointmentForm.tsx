@@ -101,6 +101,7 @@ const AppointmentForm = ({
             cancellationReason: values.cancellationReason,
           },
           type,
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         };
         const updatedAppointment = await updateAppointment(appointmentToUpdate);
         if (updatedAppointment) {
@@ -119,11 +120,9 @@ const AppointmentForm = ({
     case "cancel":
       buttonLabel = "Cancel Appointment";
       break;
-    case "create":
-      buttonLabel = "Create Appointment";
-      break;
     case "schedule":
       buttonLabel = "Schedule Appointment";
+      break;
     default:
       buttonLabel = "Submit Apppointment";
   }

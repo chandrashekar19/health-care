@@ -12,13 +12,10 @@ import { formatDateTime, parseStringify } from "../utils";
 export const createAppointment = async (
   appointment: CreateAppointmentParams
 ) => {
-  const APPOINTMENT_COLLECTION_ID =
-    process.env.NEXT_PUBLIC_APPOINTMENT_COLLECTION_ID!;
-  const DATABASE_ID = process.env.NEXT_PUBLIC_DATABASE_ID!;
   try {
     const newAppointment = await databases.createDocument(
-      DATABASE_ID!,
-      APPOINTMENT_COLLECTION_ID!,
+      process.env.NEXT_PUBLIC_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_APPOINTMENT_COLLECTION_ID!,
       ID.unique(),
       appointment
     );
@@ -32,13 +29,10 @@ export const createAppointment = async (
 
 //  GET RECENT APPOINTMENTS
 export const getRecentAppointmentList = async () => {
-  const APPOINTMENT_COLLECTION_ID =
-    process.env.NEXT_PUBLIC_APPOINTMENT_COLLECTION_ID!;
-  const DATABASE_ID = process.env.NEXT_PUBLIC_DATABASE_ID!;
   try {
     const appointments = await databases.listDocuments(
-      DATABASE_ID!,
-      APPOINTMENT_COLLECTION_ID!,
+      process.env.NEXT_PUBLIC_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_APPOINTMENT_COLLECTION_ID!,
       [Query.orderDesc("$createdAt")]
     );
 
@@ -117,7 +111,7 @@ export const sendSMSNotification = async (userId: string, content: string) => {
   }
 };
 
-// UPDATE APPOINTMENT
+//  UPDATE APPOINTMENT
 export const updateAppointment = async ({
   appointmentId,
   userId,
@@ -125,13 +119,11 @@ export const updateAppointment = async ({
   appointment,
   type,
 }: UpdateAppointmentParams) => {
-  const APPOINTMENT_COLLECTION_ID = process.env.APPOINTMENT_COLLECTION_ID!;
-  const DATABASE_ID = process.env.DATABASE_ID!;
   try {
     // Update appointment to scheduled -> https://appwrite.io/docs/references/cloud/server-nodejs/databases#updateDocument
     const updatedAppointment = await databases.updateDocument(
-      DATABASE_ID!,
-      APPOINTMENT_COLLECTION_ID!,
+      process.env.NEXT_PUBLIC_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_APPOINTMENT_COLLECTION_ID!,
       appointmentId,
       appointment
     );
@@ -158,13 +150,10 @@ export const updateAppointment = async ({
 
 // GET APPOINTMENT
 export const getAppointment = async (appointmentId: string) => {
-  const APPOINTMENT_COLLECTION_ID =
-    process.env.NEXT_PUBLIC_APPOINTMENT_COLLECTION_ID!;
-  const DATABASE_ID = process.env.NEXT_PUBLIC_DATABASE_ID!;
   try {
     const appointment = await databases.getDocument(
-      DATABASE_ID!,
-      APPOINTMENT_COLLECTION_ID!,
+      process.env.NEXT_PUBLIC_DATABASE_ID!,
+      process.env.NEXT_PUBLIC_APPOINTMENT_COLLECTION_ID!,
       appointmentId
     );
 
