@@ -34,7 +34,7 @@ const Home = ({ searchParams }: SearchParamProps) => {
         height={1000}
         width={1000}
         alt="pateint"
-        className="side-img max-w-[400px]"
+        className="side-img max-w-[50%]"
       />
     </div>
   );

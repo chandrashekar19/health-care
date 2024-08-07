@@ -67,7 +67,14 @@ const RequestSuccess = async ({
               width={24}
               alt="calendar"
             />
-            <p> {formatDateTime(appointment.schedule).dateTime}</p>
+            <p>
+              {
+                formatDateTime(
+                  appointment.schedule,
+                  "your-second-argument-here"
+                ).dateTime
+              }
+            </p>
           </div>
         </section>
 

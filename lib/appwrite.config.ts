@@ -1,14 +1,10 @@
 import * as sdk from "node-appwrite";
 require("dotenv").config();
 
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY!;
-const PROJECT_ID = process.env.NEXT_PUBLIC_PROJECT_ID!;
-const ENDPOINT = process.env.NEXT_PUBLIC_ENDPOINT!;
-
 const client = new sdk.Client()
-  .setEndpoint(ENDPOINT) // Your API Endpoint
-  .setProject(PROJECT_ID) // Your project ID
-  .setKey(API_KEY); // Your secret API key
+  .setEndpoint(process.env.NEXT_PUBLIC_ENDPOINT!)
+  .setProject(process.env.NEXT_PUBLIC_PROJECT_ID!)
+  .setKey(process.env.NEXT_PUBLIC_API_KEY!);
 
 export const databases = new sdk.Databases(client);
 export const users = new sdk.Users(client);

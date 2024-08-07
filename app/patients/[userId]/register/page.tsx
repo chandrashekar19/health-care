@@ -1,12 +1,15 @@
-import RegisterForm from "@/components/forms/RegisterForm";
-import { getUser } from "@/lib/actions/patient.actions";
 import Image from "next/image";
-import * as Sentry from "@sentry/nextjs";
-import React from "react";
+import { redirect } from "next/navigation";
 
-const Registration = async ({ params: { userId } }: SearchParamProps) => {
+import RegisterForm from "@/components/forms/RegisterForm";
+import { getPatient, getUser } from "@/lib/actions/patient.actions";
+
+const Register = async ({ params: { userId } }: SearchParamProps) => {
   const user = await getUser(userId);
-  Sentry.metrics.set("user_view_register", user.name);
+  const patient = await getPatient(userId);
+
+  if (patient) redirect(`/patients/${userId}/new-appointment`);
+
   return (
     <div className="flex h-screen max-h-screen">
       <section className="remove-scrollbar container">
@@ -18,21 +21,22 @@ const Registration = async ({ params: { userId } }: SearchParamProps) => {
             alt="patient"
             className="mb-12 h-10 w-fit"
           />
+
           <RegisterForm user={user} />
-          <div className="text-14 regular mt-20 flex justify-between">
-            <p className="py-12 copyright">© 2024 CarePulse</p>
-          </div>
+
+          <p className="copyright py-12">© 2024 CarePluse</p>
         </div>
       </section>
+
       <Image
         src="/assets/images/register-img.png"
         height={1000}
         width={1000}
-        alt="pateint"
-        className="side-img max-w-[40%]"
+        alt="patient"
+        className="side-img max-w-[390px]"
       />
     </div>
   );
 };
 
-export default Registration;
+export default Register;
