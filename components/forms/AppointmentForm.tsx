@@ -104,6 +104,7 @@ const AppointmentForm = ({
           timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         };
         const updatedAppointment = await updateAppointment(appointmentToUpdate);
+        console.log("UPDATE", updateAppointment);
         if (updatedAppointment) {
           setOpen && setOpen(false);
           form.reset();
@@ -184,7 +185,7 @@ const AppointmentForm = ({
                 name="reason"
                 label="Appointment reason"
                 placeholder="Annual montly check-up"
-                disabled={type === "schedule"}
+                // disabled={type === "schedule"}
               />
 
               <CustomFormField
@@ -192,8 +193,8 @@ const AppointmentForm = ({
                 control={form.control}
                 name="note"
                 label="Comments/notes"
-                placeholder="Prefer afternoon appointments, if possible"
-                disabled={type === "schedule"}
+                placeholder="Prefer afternoon appointments, if possiblse"
+                // disabled={type === "schedule"}
               />
             </div>
           </>
