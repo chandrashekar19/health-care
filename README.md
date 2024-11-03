@@ -17,6 +17,6 @@ CarePulse was developed to enhance the quality of patient care and streamline he
 
 ## What I Learned
 Developing CarePulse provided hands-on experience with:
-- Building and optimizing responsive user interfaces with React
-- Backend development and API integration with Node.js
+- Building and optimizing responsive user interfaces with Next js
+- Implemented using appwrite Database  for the UI used the shadcn
 -  Implementing secure data handling practices to ensure privacy and regulatory compliance
