@@ -2,24 +2,29 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
-import { Doctors } from "@/constants";
-import { getAppointment } from "@/lib/actions/appointment.actions";
+import { getAppointment } from "@/lib/db/appointment";
 import { formatDateTime } from "@/lib/utils";
 import * as Sentry from "@sentry/nextjs";
-import { getUser } from "@/lib/actions/patient.actions";
+import { getPatient } from "@/lib/db/patient";
+
 const RequestSuccess = async ({
   searchParams,
   params: { userId },
 }: SearchParamProps) => {
   const appointmentId = (searchParams?.appointmentId as string) || "";
   const appointment = await getAppointment(appointmentId);
-  const user = await getUser(userId);
 
-  Sentry.metrics.set("user_view_appointment_success", user.name);
+  if (!appointment) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <p>Error: Appointment not found.</p>
+      </div>
+    );
+  }
 
-  const doctor = Doctors?.find(
-    (doctor) => doctor.name === appointment.primaryPhysician
-  );
+  const user = await getPatient(userId);
+
+  Sentry.metrics.set("user_view_appointment_success", user?.fullName || "Unknown");
 
   return (
     <div className=" flex h-screen max-h-screen px-[5%]">
@@ -49,17 +54,15 @@ const RequestSuccess = async ({
         </section>
 
         <section className="request-details">
-          <p>Requested appointment details: </p>
+          <p>Requested appointment details:</p>
+
+          {/* ✅ Doctor Name from Postgres */}
           <div className="flex items-center gap-3">
-            <Image
-              src={doctor?.image!}
-              alt="doctor"
-              width={100}
-              height={100}
-              className="size-6"
-            />
-            <p className="whitespace-nowrap">Dr. {doctor?.name}</p>
+            <p className="text-16-semibold whitespace-nowrap">
+              Dr. {appointment.doctorName}
+            </p>
           </div>
+
           <div className="flex gap-2">
             <Image
               src="/assets/icons/calendar.svg"
@@ -68,12 +71,7 @@ const RequestSuccess = async ({
               alt="calendar"
             />
             <p>
-              {
-                formatDateTime(
-                  appointment.schedule,
-                  "your-second-argument-here"
-                ).dateTime
-              }
+              {formatDateTime(appointment.schedule).dateTime}
             </p>
           </div>
         </section>
@@ -84,7 +82,7 @@ const RequestSuccess = async ({
           </Link>
         </Button>
 
-        <p className="copyright">© 2024 CarePluse</p>
+        <p className="copyright">© 2024 CarePulse</p>
       </div>
     </div>
   );

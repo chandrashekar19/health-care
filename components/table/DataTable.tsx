@@ -8,6 +8,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Image from "next/image";
+import { useAuth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
@@ -20,7 +21,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { decryptKey } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,18 +31,14 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const encryptedKey =
-    typeof window !== "undefined"
-      ? window.localStorage.getItem("accessKey")
-      : null;
+  const { sessionClaims } = useAuth();
+  const userRole = sessionClaims?.role;
 
   useEffect(() => {
-    const accessKey = encryptedKey && decryptKey(encryptedKey);
-
-    if (accessKey !== process.env.NEXT_PUBLIC_ADMIN_PASSKEY!.toString()) {
+    if (userRole !== "admin") {
       redirect("/");
     }
-  }, [encryptedKey]);
+  }, [userRole]);
 
   const table = useReactTable({
     data,
@@ -57,21 +53,17 @@ export function DataTable<TData, TValue>({
         <TableHeader className=" bg-dark-200">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id} className="shad-table-row-header">
-              {headerGroup.headers.map((header) => {
-                return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                );
-              })}
+              {headerGroup.headers.map((header) => (
+                <TableHead key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(header.column.columnDef.header, header.getContext())}
+                </TableHead>
+              ))}
             </TableRow>
           ))}
         </TableHeader>
+
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
@@ -96,6 +88,7 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
+
       <div className="table-actions">
         <Button
           variant="outline"
@@ -104,12 +97,7 @@ export function DataTable<TData, TValue>({
           disabled={!table.getCanPreviousPage()}
           className="shad-gray-btn"
         >
-          <Image
-            src="/assets/icons/arrow.svg"
-            width={24}
-            height={24}
-            alt="arrow"
-          />
+          <Image src="/assets/icons/arrow.svg" width={24} height={24} alt="arrow" />
         </Button>
         <Button
           variant="outline"

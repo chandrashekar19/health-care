@@ -11,7 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Appointment } from "@/types/appwrite.types";
+import { Appointment } from "@/types/types";
 
 import "react-datepicker/dist/react-datepicker.css";
 import AppointmentForm from "./forms/AppointmentForm";
