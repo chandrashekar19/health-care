@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "../submit-button";
 
 export const PatientForm = () => {
   const router = useRouter();

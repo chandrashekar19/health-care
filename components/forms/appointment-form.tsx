@@ -13,8 +13,8 @@ import { Appointment } from "@/types/appointment";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import CustomFormField, { FormFieldType } from "../CustomFormField";
-import SubmitButton from "../SubmitButton";
+import CustomFormField, { FormFieldType } from "../custom-form-field";
+import SubmitButton from "../submit-button";
 import { Form } from "../ui/form";
 
 interface AppointmentFormProps {

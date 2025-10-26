@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,24 +10,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Appointment } from "@/types/types";
+import AppointmentForm from "./forms/appointment-form";
+import { Appointment } from "@/types/appointment";
 
-import "react-datepicker/dist/react-datepicker.css";
-import AppointmentForm from "./forms/AppointmentForm";
+interface AppointmentModalProps {
+  patientId: string;
+  userId: string;
+  appointment?: Appointment;
+  type: "schedule" | "cancel";
+}
 
 export const AppointmentModal = ({
   patientId,
   userId,
   appointment,
   type,
-}: {
-  patientId: string;
-  userId: string;
-  appointment?: Appointment;
-  type: "schedule" | "cancel";
-  title: string;
-  description: string;
-}) => {
+}: AppointmentModalProps) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -36,16 +33,23 @@ export const AppointmentModal = ({
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-          className={`capitalize ${type === "schedule" && "text-green-500"}`}
+          className={`${
+            type === "schedule" ? "text-green-500" : "text-red-500"
+          } capitalize`}
         >
-          {type}
+          {type === "schedule" ? "Schedule" : "Cancel"}
         </Button>
       </DialogTrigger>
+
       <DialogContent className="shad-dialog sm:max-w-md">
         <DialogHeader className="mb-4 space-y-3">
-          <DialogTitle className="capitalize">{type} Appointment</DialogTitle>
+          <DialogTitle className="capitalize">
+            {type === "schedule" ? "Schedule Appointment" : "Cancel Appointment"}
+          </DialogTitle>
           <DialogDescription>
-            Please fill in the following details to {type} appointment
+            {type === "schedule"
+              ? "Confirm the appointment details to schedule."
+              : "Provide a reason to cancel this appointment."}
           </DialogDescription>
         </DialogHeader>
 

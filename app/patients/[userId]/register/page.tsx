@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
-import RegisterForm from "@/components/forms/RegisterForm";
+import RegisterForm from "@/components/forms/register-form";
 import { getPatient } from "@/lib/db/patient";
 import Link from "next/link";
 

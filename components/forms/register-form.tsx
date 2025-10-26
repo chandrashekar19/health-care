@@ -10,8 +10,8 @@ import { useUser } from "@clerk/nextjs";
 import { Form, FormControl } from "@/components/ui/form";
 import { PatientFormValidation } from "@/lib/validation";
 import "react-phone-number-input/style.css";
-import CustomFormField, { FormFieldType } from "../CustomFormField";
-import SubmitButton from "../SubmitButton";
+import CustomFormField, { FormFieldType } from "../custom-form-field";
+import SubmitButton from "../submit-button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
@@ -21,7 +21,7 @@ import {
 } from "@/constants";
 import { SelectItem } from "../ui/select";
 import Image from "next/image";
-import { FileUploader } from "../FileUploader";
+import { FileUploader } from "../file-uploader";
 import { registerPatient } from "@/lib/db/patient";
 
 interface RegisterFormProps {

@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDateTime } from "@/lib/utils";
-import { StatusBadge } from "../StatusBadge";
+import { StatusBadge } from "../status-badge";
 import { Appointment } from "@/types/appointment";
 
 export const columns: ColumnDef<Appointment>[] = [
