@@ -6,7 +6,7 @@
     <img src="https://img.shields.io/badge/-Next_JS-black?style=for-the-badge&logoColor=white&logo=nextdotjs&color=000000" alt="nextdotjs" />
     <img src="https://img.shields.io/badge/-TypeScript-black?style=for-the-badge&logoColor=white&logo=typescript&color=3178C6" alt="typescript" />
     <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=white&logo=tailwindcss&color=06B6D4" alt="tailwindcss" />
-    <img src="https://img.shields.io/badge/-Appwrite-black?style=for-the-badge&logoColor=white&logo=appwrite&color=FD366E" alt="appwrite" />
+    <img src="https://img.shields.io/badge/-Supabase-black?style=for-the-badge&logoColor=white&logo=appwrite&color=FD366E" alt="supabase" />
   </div>
 
   <h3 align="center">A HealthCare Management System</h3>
@@ -27,11 +27,11 @@ A healthcare patient management application that allows patients to easily regis
 ## <a name="tech-stack">⚙️ Tech Stack</a>
 
 - Next.js
-- Appwrite
+- Supabase
 - Typescript
 - TailwindCSS
 - ShadCN
-- Twilio
+- Clerk
 
 ## <a name="features">🔋 Features</a>
 
@@ -87,16 +87,13 @@ npm install
 Create a new file named `.env.local` in the root of your project and add the following content:
 
 ```env
-#APPWRITE
-NEXT_PUBLIC_ENDPOINT=https://cloud.appwrite.io/v1
-PROJECT_ID=
-API_KEY=
-DATABASE_ID=
-PATIENT_COLLECTION_ID=
-APPOINTMENT_COLLECTION_ID=
-NEXT_PUBLIC_BUCKET_ID=
+NEXT_PUBLIC_APP_URL=http://localhost:3000
 
-NEXT_PUBLIC_ADMIN_PASSKEY=111111
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+DATABASE_URL=
+JWT_SECRET=
+ENCRYPTION_KEY=
 ```
 
 Replace the placeholder values with your actual Appwrite credentials. You can obtain these credentials by signing up on the [Appwrite website](https://appwrite.io/).
